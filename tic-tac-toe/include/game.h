@@ -1,12 +1,45 @@
-#include "board.h"
+/*
+The MIT License (MIT)
 
+Copyright (c) Swagato Chatterjee
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+#include "board.h"
+#include "aiplayer.h"
+#include <stdbool.h>
+
+#pragma once
+#ifndef GAME_H
+#define GAME_H
 typedef struct game {
-    board game_board;
-    gstate board_state;
-    sdstate current_player;
+    board* game_board; // the game board
+    gstate board_state; // the current state of the game (enum gstate)
+    sdstate current_player; // the current player(seed) (enum sdstate)
+    aiplayer* ai; // The ai player
+    bool AI_GAME, AI_PLAYING; //hum vs comp. game and ai's turn flag
 } game;
 
-void build(game*);
-void init(game*);
-void player_move(game*);
-void update_game(game*);
+void gbuild(game*);
+void ginit(game*);
+void player_move(game*, sdstate);
+void update_game(game*, sdstate);
+void gclean(game*);
+
+#endif

@@ -1,3 +1,28 @@
+/*
+The MIT License (MIT)
+
+Copyright (c) Swagato Chatterjee
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 typedef enum sdstate{
     EMPTY, EX, OH
 } sdstate; // The seed state
@@ -6,16 +31,6 @@ typedef enum gstate {
     PLAYING, DRAW, XWON, OWON
 } gstate; // The game state
 
-int  winningPatterns[] = {
-    0x1c0,   // 0b111 000 000 (row 2)
-    0x038,   // 0b000 111 000 (row 1)
-    0x007,   // 0b000 000 111 (row 0)
-    0x124,   // 0b100 100 100 (col 2)
-    0x092,   // 0b010 010 010 (col 1)
-    0x049,   // 0b001 001 001 (col 0)
-    0x111,   // 0b100 010 001 (diagonal)
-    0x054    // 0b001 010 100 (opposite diagonal)
-};// msb is (2, 2); lsb is (0, 0)
-
 #define ROWS 3
 #define COLS 3
+#endif

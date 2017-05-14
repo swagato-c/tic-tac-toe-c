@@ -21,21 +21,29 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "constants.h"
+#include "../include/cell.h"
+#include <stdlib.h>
 
-#ifndef CELL_H
-#define CELL_H
-typedef struct cell {
-    sdstate content;
-    // content of this cell of type sdstate(Seed).
-    // take a value of Seed.EMPTY, Seed.EX, or Seed.OH
-    int row, col;
-} cell;
+void cbuild(cell *c, int x, int y){
+    c->row = x;
+    c->col = y;
+    c->content = EMPTY;
+}
 
-void cbuild(cell*,int,int);
-void clear(cell*);
-void content(cell*,sdstate);
-char cpaint(cell*);
-void cclean(cell*);
+void content(cell *c, sdstate state){
+    c->content = state;
+}
 
-#endif
+void clear(cell *c){
+    content(c, EMPTY);
+}
+
+char cpaint(cell *c){
+    if(c->content == EMPTY) return ' ';
+    else if(c->content == EX) return 'x';
+    else return 'o';
+}
+
+void cclean(cell *c){
+    free(c);
+}

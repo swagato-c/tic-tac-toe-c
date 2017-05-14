@@ -21,21 +21,40 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "constants.h"
+#include "board.h"
+#include "vector.h"
+#include <stdbool.h>
 
-#ifndef CELL_H
-#define CELL_H
-typedef struct cell {
-    sdstate content;
-    // content of this cell of type sdstate(Seed).
-    // take a value of Seed.EMPTY, Seed.EX, or Seed.OH
-    int row, col;
-} cell;
+#pragma once
+#ifndef AI_PLAYER_H
+#define AIPLAYER_H
+typedef struct aiplayer {
+    board* brd;
+    sdstate mseed, oseed;
+} aiplayer;
 
-void cbuild(cell*,int,int);
-void clear(cell*);
-void content(cell*,sdstate);
-char cpaint(cell*);
-void cclean(cell*);
+typedef struct aimove{
+    int score, pos;
+} aimove;
+
+/*
+ * To construct an AI player:
+ * 1. Construct an instance (of its subclass) with the game Board
+ * 2. Call setSeed() to set the computer's seed
+ * 3. Call move() which returns the next move as a 1D position
+ *
+ * The implementation shall not modify brd->cell[][]
+ * Assume that next move is available, i.e., not game-over yet.
+ */
+
+void abuild(aiplayer*, board*);
+void set_seed(aiplayer*, sdstate);
+int move(aiplayer*);
+aimove minimax(aiplayer*, int, sdstate);
+vector* gen_moves(aiplayer*);
+int eval(aiplayer*);
+int evalline(aiplayer*, int, int, int, int, int, int);
+bool ai_has_won(aiplayer*, sdstate);
+void aclean(aiplayer*);
 
 #endif
