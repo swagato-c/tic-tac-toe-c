@@ -1,14 +1,26 @@
-INCLUDE_PATH = include/
-PROJECT_NAME = tictactoe
+#OBJECTS = main.o $(SRC_OBJECTS)
+SRC_FILES = src
+CFLAGS = -Wall
+INCLUDE = include
+DEBUG_FLAGS = -ggdb
+NAME = tictac
 
-cli_exec:
-	bin
-	gcc main.c ./bin/* -I$(INCLUDE_PATH) -o $(PROJECT_NAME)
+build :bin
+	gcc -c main.c
+	gcc main.o libraries/*.o -o $(NAME) -O2
+
+install: build clean
+	clear && make build && make clean
 
 bin:
-	mkdir bin
-	gcc -c ./src/*.c -I$(INCLUDE_PATH)-std='c11' -Wall
-	mv *.o ./bin
+	mkdir -p libraries/
+	for dir in $(SRC_FILES); do\
+		cd $$dir;\
+		gcc -c *.c -I=../$(INCLUDE) $(CFLAGS);\
+		mv *.o ../libraries;\
+		cd ..;\
+	done
 
 clean:
-	rm -rf bin/ $(PROJECT_NAME)
+	rm -rf libraries
+	rm *.o
