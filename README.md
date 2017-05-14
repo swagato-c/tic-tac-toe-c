@@ -11,5 +11,5 @@ make install
 `./src/tictac`
 
 # TODOS:
-[] Add Alpha-Beta Pruning
+-[ ] Add Alpha-Beta Pruning
 
