@@ -6,9 +6,10 @@ The code can be compiled as
 ```
 cd tic-tac-toe
 make install
+cd ..
 ```
 # Executing
-`./src/tictac`
+`./tic-tac-toe/tictac`
 
 # TODOS:
 - [ ] Add Alpha-Beta Pruning
